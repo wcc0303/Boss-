@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+	<meta charset="utf-8">
+	<title>智聘视界——基于DrissionPage的BOSS直聘数据可视化平台</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/chart.css" />
+</head>
+
+<body>
+	<!-- 导航栏 -->
+	<nav class="navbar">
+		<a href="index.html" class="nav_eng">智聘视界</a>
+		<ul class="nav_menu">
+			<a href="index.html" class="nav_link">
+				<li class="nav_item">首页</li>
+			</a>
+			<a href="nianxin.html" class="nav_link">
+				<li class="nav_item">年薪</li>
+			</a>
+			<a href="xueli.html" class="nav_link">
+				<li class="nav_item">学历</li>
+			</a>
+			<a href="jingyan.html" class="nav_link">
+				<li class="nav_item">经验</li>
+			</a>
+		</ul>
+		<div class="menu_btn">
+			<span class="line"></span>
+			<span class="line"></span>
+			<span class="line"></span>
+		</div>
+	</nav>
+
+	<!-- 第一个图表容器 -->
+	<div class="container1">
+		<div class="main-container">
+			<div id="mainn">
+			</div>
+			<div id="sidebarn">
+				<div id="chart32" class="image-containern">
+					<!-- 图表 2 容器 -->
+				</div>
+				<div id="chart33" class="image-containern">
+					<!-- 图表 3 容器 -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 第2个图表容器 -->
+	<div class="container1">
+		<div class="main-container">
+			<div id="mainn34">
+			</div>
+			<div id="sidebarn">
+				<div id="chart35" class="image-containern">
+					<!-- 图表 2 容器 -->
+				</div>
+				<div id="chart36" class="image-containern">
+					<!-- 图表 3 容器 -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 第3个图表容器 -->
+	<div class="container1">
+		<div class="main-container">
+			<div id="mainn37">
+				<p>hhhh</p>
+			</div>
+			<div id="sidebarn">
+				<div id="chart38" class="image-containern">
+					<!-- 图表 2 容器 -->
+				</div>
+				<div id="chart39" class="image-containern">
+					<!-- 图表 3 容器 -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="goTop"><img src="image/top.png" alt="" /></div>
+	<div class="datasource">数据来源：Boss直聘官网</div>
+</body>
+
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/china.js"></script>
+<script src="js/script.js"></script>
+
+<script type="text/javascript">
+	// 初始化第1个图表
+	var chartDom1 = document.getElementById('mainn');
+	var myChart1 = echarts.init(chartDom1);
+	var option1 = {
+        title: {
+            text: '经验要求与招聘数量、平均年薪之间的关系-互联网',top:'2%',left:'5%'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+		legend: {left: '55%',top:'2%',
+            data: ['招聘数量', '平均年薪']
+        },
+		grid:{
+			top:'15%'
+
+		},
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        }, 
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: ['10年以上', '5-10年', '3-5年', '1-3年', '1年以内', '在校/应届', '经验不限'] 
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '招聘数量',
+                min: 0,
+                max: 4800,
+                interval: 600,
+                axisLabel: {
+                    formatter: '{value} '+'个'
+                },
+        splitLine: { show: false },  // Disable grid lines for this Y-axis
+        splitArea: { show: false } 
+            },
+            {
+                type: 'value',
+                name: '平均年薪',
+                min: 90000,
+                max: 320000,
+                interval: 50000,
+                axisLabel: {
+                    formatter: '{value}'+'元'
+                },
+        splitLine: { show: false },  // Disable grid lines for this Y-axis
+        splitArea: { show: false } 
+            }
+        ],
+        series: [
+            {
+                name: '招聘数量',color:'#2196f1',
+				center: ['65%', '80%'],
+                type: 'bar',
+				color:'#aa96da',
+                yAxisIndex: 0,
+                data: [61, 1314, 4345, 4415, 325, 234, 2058] , markPoint: {
+                    data: [
+                        { name: 'Max', type: 'max' },
+                        { name: 'Min', type: 'min' }
+                    ]
+                },
+                 
+            },
+            {
+                name: '平均年薪',
+				color:'#87CEEB',
+                type: 'bar',
+                yAxisIndex: 1,
+                data: [
+       314790.98, 245746.77, 178046.14,128266.98,90811.54,129335.47,167164.26
+      ],
+                markPoint: {
+                    data: [
+                        { name: 'Max', type: 'max' },
+                        { name: 'Min', type: 'min' }
+                    ]
+                },
+                markLine: {
+                    data: [{ type: 'average', name: 'Avg' }]
+                }
+            }
+        ]
+    };
+	option1 && myChart1.setOption(option1);
+	
+	// 初始化第2个图表
+	var chartDom2 = document.getElementById('chart32');
+	var myChart2 = echarts.init(chartDom2);
+	var option2 = {
+		title: {
+    text: '经验要求与招聘数量之间的关系',
+    left: '40%',
+    top: '0.3%',
+    textStyle: {
+        fontSize:12 // 假设这里的单位是像素
+    }
+},
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			orient: 'vertical',
+			left: '5%',
+			top: '5%',
+			padding: [10, 20],
+			itemGap: 14, // 设置图例项之间的间距
+		},
+		series: [
+			{
+				name: '经验要求',
+				center: ['65%', '50%'],
+				type: 'pie',
+				radius: ['40%', '70%'],
+				avoidLabelOverlap: false,
+				padAngle: 5,
+				itemStyle: {
+					borderRadius: 10
+				},
+
+				label: {
+					show: false,
+					position: 'center'
+				},
+				emphasis: {
+					label: {
+						show: true,
+						fontSize: 40,
+						fontWeight: 'bold'
+					}
+				},
+				labelLine: {
+					show: false
+				},
+				color: ['#8c82fc', '#fc5c9c', '#00e0ff', '#fcefee', '#f5c7f7', '#ff99fe', '#f3f798'],
+				data: [
+					{
+						"value": 61,
+						"name": "10年以上"
+					},{
+						"value": 1314,
+						"name": "5-10年"
+					},{
+						"value": 4345,
+						"name": "3-5年"
+					},
+					{
+						"value": 4415,
+						"name": "1-3年"
+					},{
+						"value": 325,
+						"name": "1年以内"
+					},{
+						"value": 234,
+						"name": "在校/应届"
+					}
+					,
+					{
+						"value": 2058,
+						"name": "经验不限"
+					}
+					
+					
+					
+				]
+			}
+		]
+	};
+	// 初始化第3个图表
+	var chartDom3 = document.getElementById('chart33');
+	var myChart3 = echarts.init(chartDom3);
+	var option3 = 
+		{
+		title: {
+    text: '经验要求与平均年薪之间的关系',
+    left: '40%',
+    top: '0.3%',
+    textStyle: {
+        fontSize:12 // 假设这里的单位是像素
+    }
+},
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			orient: 'vertical',
+			left: '5%',
+			top: '5%',
+			padding: [10, 20],
+			itemGap: 14, // 设置图例项之间的间距
+		},
+		series: [
+			{
+				name: '经验要求',
+				center: ['65%', '50%'],
+				type: 'pie',
+				radius: ['40%', '70%'],
+				avoidLabelOverlap: false,
+				padAngle: 5,
+				itemStyle: {
+					borderRadius: 10
+				},
+
+				label: {
+					show: false,
+					position: 'center'
+				},
+				emphasis: {
+					label: {
+						show: true,
+						fontSize: 40,
+						fontWeight: 'bold'
+					}
+				},
+				labelLine: {
+					show: false
+				},
+				color: ['#8c82fc', '#fc5c9c', '#00e0ff', '#fcefee', '#f5c7f7', '#ff99fe', '#f3f798'],
+				data: [
+				{
+						"value": 314790.98,
+						"name": "10年以上"
+					},{
+						"value": 245746.77,
+						"name": "5-10年"
+					},{
+						"value": 178046.14,
+						"name": "3-5年"
+					},
+					{
+						"value": 128266.98,
+						"name": "1-3年"
+					},
+					
+
+					{
+						"value": 90811.54,
+						"name": "1年以内"
+					},
+
+					
+					
+					{
+						"value": 129335.47,
+						"name": "在校/应届"
+					},
+					{
+						"value": 167164.26,
+						"name": "经验不限"
+					}
+				]
+			}
+		]
+	};
+	option2 && myChart2.setOption(option2);
+	option3 && myChart3.setOption(option3);
+	// 初始化第4个图表
+	var chartDom4 = document.getElementById('mainn34');
+	var myChart4 = echarts.init(chartDom4);
+	var option4 = {
+        title: {
+            text: '经验要求与招聘数量、平均年薪之间的关系-人力/行政',top:'2%',left:'5%'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+		legend: {left: '60%',top:'2%',
+            data: ['招聘数量', '平均年薪']
+        },
+		grid:{
+			top:'15%'
+
+		},
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        }, 
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: ['10年以上', '5-10年', '3-5年', '1-3年', '1年以内', '在校/应届', '经验不限']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '招聘数量',
+                min: 0,
+                max: 4500,
+                interval: 600,
+                axisLabel: {
+                    formatter: '{value} '
+                }, splitLine: { show: false },  // Disable grid lines for this Y-axis
+				splitArea: { show: false } 
+            },
+            {
+                type: 'value',
+                name: '平均年薪',
+                min: 60000,
+                max: 310000,
+                interval: 50000,
+                axisLabel: {
+                    formatter: '{value} '
+                } ,splitLine: { show: false },  // Disable grid lines for this Y-axis
+				splitArea: { show: false } 
+            }
+        ],
+        series: [
+            {
+                name: '招聘数量',color:'#aa96da',
+				
+				center: ['65%', '80%'],
+                type: 'bar',
+                yAxisIndex: 0,
+                data: [290, 1641, 2813, 4423, 857, 198, 4494] 
+                 
+            },
+            {
+                name: '平均年薪',color:'#87CEEB',
+                type: 'bar',
+                yAxisIndex: 1,
+                data: [
+       303987.93, 187390.31, 112742.62,74335.17,62621.64,72417.92,69883.76
+      ],
+                markPoint: {
+                    data: [
+                        { name: 'Max', type: 'max' },
+                        { name: 'Min', type: 'min' }
+                    ]
+                },
+                markLine: {
+                    data: [{ type: 'average', name: 'Avg' }]
+                }
+            }
+        ]
+    };
+	option4 && myChart4.setOption(option4);
+	// 初始化第5个图表
+	var chartDom5 = document.getElementById('chart35');
+	var myChart5 = echarts.init(chartDom5);
+	var option5 =  
+		{
+		title: {
+    text: '经验要求与招聘数量之间的关系',
+    left: '40%',
+    top: '0.3%',
+    textStyle: {
+        fontSize:12 // 假设这里的单位是像素
+    }
+},
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			orient: 'vertical',
+			left: '5%',
+			top: '5%',
+			padding: [10, 20],
+			itemGap: 14, // 设置图例项之间的间距
+		},
+		series: [
+			{
+				name: '经验要求',
+				center: ['65%', '50%'],
+				type: 'pie',
+				radius: ['40%', '70%'],
+				avoidLabelOverlap: false,
+				padAngle: 5,
+				itemStyle: {
+					borderRadius: 10
+				},
+
+				label: {
+					show: false,
+					position: 'center'
+				},
+				emphasis: {
+					label: {
+						show: true,
+						fontSize: 40,
+						fontWeight: 'bold'
+					}
+				},
+				labelLine: {
+					show: false
+				}, color: ['#8c82fc', '#fc5c9c', '#00e0ff', '#fcefee', '#f5c7f7', '#ff99fe', '#f3f798'],
+				data: [
+					{
+						"value": 290,
+						"name": "10年以上"
+					},{
+						"value": 1641,
+						"name": "5-10年"
+					},{
+						"value": 2813,
+						"name": "3-5年"
+					},
+					{
+						"value": 4423,
+						"name": "1-3年"
+					},{
+						"value": 857,
+						"name": "1年以内"
+					},{
+						"value": 198,
+						"name": "在校/应届"
+					}
+					,
+					{
+						"value": 4494,
+						"name": "经验不限"
+					}
+					
+					
+					
+				]
+			}
+		]
+	};
+	// 初始化第6个图表
+	var chartDom6 = document.getElementById('chart36');
+	var myChart6 = echarts.init(chartDom6);
+	var option6 = 
+		{
+		title: {
+    text: '经验要求与平均年薪之间的关系',
+    left: '40%',
+    top: '0.3%',
+    textStyle: {
+        fontSize:12 // 假设这里的单位是像素
+    }
+},
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			orient: 'vertical',
+			left: '5%',
+			top: '5%',
+			padding: [10, 20],
+			itemGap: 14, // 设置图例项之间的间距
+		},
+		series: [
+			{
+				name: '经验要求',
+				center: ['65%', '50%'],
+				type: 'pie',
+				radius: ['40%', '70%'],
+				avoidLabelOverlap: false,
+				padAngle: 5,
+				itemStyle: {
+					borderRadius: 10
+				},
+
+				label: {
+					show: false,
+					position: 'center'
+				},color: ['#8c82fc', '#fc5c9c', '#00e0ff', '#fcefee', '#f5c7f7', '#ff99fe', '#f3f798'],
+				emphasis: {
+					label: {
+						show: true,
+						fontSize: 40,
+						fontWeight: 'bold'
+					}
+				},
+				labelLine: {
+					show: false
+				},
+				 
+				data: [
+				{
+						"value": 303987.93,
+						"name": "10年以上"
+					},{
+						"value": 187390.31,
+						"name": "5-10年"
+					},{
+						"value": 112742.62,
+						"name": "3-5年"
+					},
+					{
+						"value": 74335.17,
+						"name": "1-3年"
+					},
+					
+
+					{
+						"value": 62621.64,
+						"name": "1年以内"
+					},
+
+					
+					
+					{
+						"value": 72417.92,
+						"name": "在校/应届"
+					},
+					{
+						"value": 69883.76,
+						"name": "经验不限"
+					}
+				]
+			}
+		]
+	};
+	option5 && myChart5.setOption(option5);
+	option6 && myChart6.setOption(option6);
+	// 初始化第7个图表
+	var chartDom7 = document.getElementById('mainn37');
+	var myChart7 = echarts.init(chartDom7);
+	var option7 = {
+        title: {
+            text: '经验要求与招聘数量、平均年薪之间的关系-直播/影视',top:'2%',left:'5%'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+		legend: {left: '60%',top:'2%',
+            data: ['招聘数量', '平均年薪']
+        },
+		grid:{
+			top:'15%'
+
+		},
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        }, 
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: ['10年以上', '5-10年', '3-5年', '1-3年', '1年以内', '在校/应届', '经验不限']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '招聘数量',
+                min: 0,
+                max: 7100,
+                interval: 600,
+                axisLabel: {
+                    formatter: '{value} '
+                }, splitLine: { show: false },  // Disable grid lines for this Y-axis
+				splitArea: { show: false } 
+            },
+            {
+                type: 'value',
+                name: '平均年薪',
+                min: 70000,
+                max: 240000,
+                interval: 50000,
+                axisLabel: {
+                    formatter: '{value} '
+                } ,splitLine: { show: false },  // Disable grid lines for this Y-axis
+				splitArea: { show: false } 
+            }
+        ],
+        series: [
+            {
+                name: '招聘数量',color:'#aa96da',
+				center: ['65%', '80%'],
+                type: 'bar',
+                yAxisIndex: 0,
+                data: [13, 197, 1398,  5700, 1243, 240,7069],
+                markPoint: {
+                    data: [
+                        { type: 'max', name: 'Max' },
+                        { type: 'min', name: 'Min' }
+                    ]
+                } 
+            },
+            {
+                name: '平均年薪',color:'#87CEEB',
+                type: 'bar',
+                yAxisIndex: 1,
+                data: [
+       238192.30, 168086.54, 128559.58,99053.85,90193.20,70021.875,97545.77
+      ],
+                markPoint: {
+                    data: [
+                        { name: 'Max', type: 'max' },
+                        { name: 'Min', type: 'min' }
+                    ]
+                },
+                markLine: {
+                    data: [{ type: 'average', name: 'Avg' }]
+                }
+            }
+        ]
+    };
+	option7 && myChart7.setOption(option7);
+	// 初始化第8个图表
+	var chartDom8 = document.getElementById('chart38');
+	var myChart8 = echarts.init(chartDom8);
+	var option8 = {
+		title: {
+    text: '经验要求与招聘数量之间的关系',
+    left: '40%',
+    top: '0.3%',
+    textStyle: {
+        fontSize:12 // 假设这里的单位是像素
+    }
+},
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			orient: 'vertical',
+			left: '5%',
+			top: '5%',
+			padding: [10, 20],
+			itemGap: 14, // 设置图例项之间的间距
+		},
+		series: [
+			{
+				name: '经验要求',
+				center: ['65%', '50%'],
+				type: 'pie',
+				radius: ['40%', '70%'],
+				avoidLabelOverlap: false,
+				padAngle: 5,
+				itemStyle: {
+					borderRadius: 10
+				},
+
+				label: {
+					show: false,
+					position: 'center'
+				},
+				emphasis: {
+					label: {
+						show: true,
+						fontSize: 40,
+						fontWeight: 'bold'
+					}
+				},
+				labelLine: {
+					show: false
+				},color: ['#8c82fc', '#fc5c9c', '#00e0ff', '#fcefee', '#f5c7f7', '#ff99fe', '#f3f798'],
+				data: [
+					{
+						"value": 13,
+						"name": "10年以上"
+					},{
+						"value": 197,
+						"name": "5-10年"
+					},{
+						"value": 1398,
+						"name": "3-5年"
+					},
+					{
+						"value":5700,
+						"name": "1-3年"
+					},{
+						"value":1234,
+						"name": "1年以内"
+					},{
+						"value": 240,
+						"name": "在校/应届"
+					}
+					,
+					{
+						"value": 7069,
+						"name": "经验不限"
+					}
+					
+					
+					
+				]
+			}
+		]
+	};
+	// 初始化第9个图表
+	var chartDom9 = document.getElementById('chart39');
+	var myChart9 = echarts.init(chartDom9);
+	var option9 = {
+		title: {
+    text: '经验要求与平均年薪之间的关系',
+    left: '40%',
+    top: '0.3%',
+    textStyle: {
+        fontSize:12 // 假设这里的单位是像素
+    }
+},
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			orient: 'vertical',
+			left: '5%',
+			top: '5%',
+			padding: [10, 20],
+			itemGap: 14, // 设置图例项之间的间距
+		},
+		series: [
+			{
+				name: '经验要求',
+				center: ['65%', '50%'],
+				type: 'pie',
+				radius: ['40%', '70%'],
+				avoidLabelOverlap: false,
+				padAngle: 5,
+				itemStyle: {
+					borderRadius: 10
+				},
+
+				label: {
+					show: false,
+					position: 'center'
+				},
+				emphasis: {
+					label: {
+						show: true,
+						fontSize: 40,
+						fontWeight: 'bold'
+					}
+				},
+				labelLine: {
+					show: false
+				},color: ['#8c82fc', '#fc5c9c', '#00e0ff', '#fcefee', '#f5c7f7', '#ff99fe', '#f3f798'],
+				data: [
+				{
+						"value": 238192.30,
+						"name": "10年以上"
+					},{
+						"value": 168086.54,
+						"name": "5-10年"
+					},{
+						"value": 128559.58,
+						"name": "3-5年"
+					},
+					{
+						"value": 99053.85,
+						"name": "1-3年"
+					},
+					
+
+					{
+						"value": 90193.20,
+						"name": "1年以内"
+					},
+
+					
+					
+					{
+						"value": 70021.875,
+						"name": "在校/应届"
+					},
+					{
+						"value": 97545.77,
+						"name": "经验不限"
+					}
+				]
+			}
+		]
+	};
+	option8 && myChart8.setOption(option8);
+	option9 && myChart9.setOption(option9);
+</script>
+
+</html>

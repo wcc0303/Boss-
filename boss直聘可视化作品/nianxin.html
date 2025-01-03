@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+		<meta charset="utf-8">
+		<title>智聘视界——基于DrissionPage的BOSS直聘数据可视化平台</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/chart.css" />
+		 
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+      <a href="index.html" class="nav_eng">智聘视界</a>
+      <ul class="nav_menu">
+        <a href="index.html" class="nav_link">
+          <li class="nav_item">首页</li>
+        </a>
+        <a href="nianxin.html" class="nav_link">
+          <li class="nav_item">年薪</li>
+        </a>
+        <a href="xueli.html" class="nav_link">
+          <li class="nav_item">学历</li>
+        </a>
+        <a href="jingyan.html" class="nav_link">
+          <li class="nav_item">经验</li>
+        </a> 
+      </ul>
+
+			<div class="menu_btn">
+				<span class="line"></span>
+				<span class="line"></span>
+				<span class="line"></span>
+			</div>
+		</nav>
+ 
+
+		<div class="container1">
+      <div class="main-container">
+          <div id="mainn">
+              <!-- 图表内容 -->
+          </div>
+          <div id="sidebarn">
+              <div class="image-containern">
+                  <img src="image/city_34.png" alt="城市图片">
+              </div>
+              <div class="image-containern">
+                  <img src="image/岗位_ten.png" alt="职业图片">
+              </div>
+          </div>
+      </div>
+  </div>
+  
+      
+				</div> 
+			</div>
+			 
+			 
+		</div>
+		<div class="container2 animate">
+			<div class="chart_border2">  
+				<div id="chart13"></div>
+				 
+			</div>
+			 
+		</div>
+		<div  class="container3 animate">
+		 
+			<div id="main1"></div>
+		 
+			 
+		</div>
+
+		<div class="goTop"><img src="image/top.png" alt="" /></div>
+    <div class="datasource">数据来源：Boss直聘官网</div>
+	</body>
+
+	<script type="text/javascript" src="js/echarts.min.js"></script>
+	<script type="text/javascript" src="js/china.js"></script>
+	<script src="js/script.js"></script>
+
+	<script type="text/javascript">
+		var chartDom = document.getElementById('main1');
+        var myChart = echarts.init(chartDom);
+        
+        // Data with zero values removed
+        var cities = ["上海", "杭州", "南京", "广州", "成都", "拉萨", "武汉", "澳门", "重庆", "香港"];
+        var seriesData = [
+            [617083.33, 0, 0, 0, 278483.33, 0, 252400.0, 0, 176687.50, 0],
+            [0, 0, 0, 0, 0, 0, 0, 240500.0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 420066.67],
+            [0, 0, 0, 0, 0, 0, 0, 195000.0, 0, 467500.0],
+            [0, 314083.33, 262550.0, 0, 0, 283500.0, 183550.0, 138000.0, 0, 514250.0],
+            [335341.67, 0, 0, 240433.33, 0, 0, 0, 0, 0, 0],
+            [233133.33, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 381425.00, 283316.67, 312066.67, 272358.33, 0, 254533.33, 0, 189600.00, 0],
+            [0, 233550.00, 177783.33, 0, 174833.33, 129000.0, 0, 0, 0, 0],
+            [0, 0, 0, 372266.67, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 950000.0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 183575.00, 0]
+        ];
+
+        // Filter data to remove zero values
+        var filteredData = seriesData.map(data => data.map(value => (value === 0 ? '-' : value)));
+		//图表1
+		var option1 = {
+            title: {
+                text: '各城市技术岗位年薪分布',
+                left: 'center',
+                top: '10px',
+                textStyle: { fontSize: 20 }
+                 
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'shadow' },
+                formatter: function(params) {
+                    let result = `${params[0].name}<br>`;
+                    params.forEach(item => {
+                        if (item.value !== '-') {
+                            result += `${item.seriesName}: ${item.value.toLocaleString()}<br>`;
+                        }
+                    });
+                    return result;
+                }
+            },
+            legend: { 
+                data: ['区块链工程师', '.NET', 'Android', 'C#', 'C/C++', 'U3D', 'UE4', 'Golang', '全栈工程师', '语音/视频/图形开发', 'PHP', 'Python'],
+                orient: 'horizontal',
+                top: '45px',
+                left: 'center' 
+            },
+            grid: { left: '3%', right: '4%',top: '15%',  height: '77%' ,  
+			bottom: '5%',   containLabel: true },
+            xAxis: { 
+                type: 'value', 
+                name: '年薪 (元)', 
+                nameLocation: 'middle', 
+                nameGap: 40, // Increased gap to give more space for the label
+                min: 0 // Ensure the axis starts from 0
+            },
+            yAxis: {
+                type: 'category',
+                data: cities,
+				aaxisLabel: {
+            interval: 0,      // Ensure all labels are shown
+            fontSize: 10,     // Adjust font size to ensure readability
+        },
+        axisTick: {
+            alignWithLabel: true, // Align the tick marks with the labels
+            length: 2  // Removes tick length to prevent extra spacing
+        }
+            },
+            series: [
+			
+                {barWidth:'50%', barGap: '10%',   name: '区块链工程师', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[0], itemStyle: { color: '#87CEEB' }},
+                { barWidth:'20%',name: '.NET', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[1], itemStyle: { color:  '#FFD700' }},
+                {barWidth:'20%', name: 'Android', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[2], itemStyle: { color:  '#90EE90' }},
+                {barWidth:'20%', name: 'C#', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[3], itemStyle: { color: '#FFB6C1' }},
+                {barWidth:'20%', name: 'C/C++', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[4], itemStyle: { color: '#FF8C00' }},
+                {barWidth:'20%', name: 'U3D', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[5], itemStyle: { color: '#8A2BE2' }},
+                {barWidth:'20%', name: 'UE4', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[6], itemStyle: { color: '#ADD8E6' }},
+                {barWidth:'20%', name: 'Golang', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[7], itemStyle: { color: '#DAA520' }},
+                {barWidth:'20%', name: '全栈工程师', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[8], itemStyle: { color: '#D3D3D3' }},
+                { barWidth:'20%',name: '语音/视频/图形开发', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[9], itemStyle: { color: '#C71585' }},
+                {barWidth:'20%', name: 'PHP', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[10], itemStyle: { color: '#20B2AA' }},
+                {barWidth:'20%', name: 'Python', type: 'bar', stack: 'total', label: { show: true }, emphasis: { focus: 'series' }, data: filteredData[11], itemStyle: { color: '#9370DB' }}
+            ]
+        };
+		myChart.setOption(option1);
+		// 图表2
+		const cityData =  [
+      ["香港", 390412.31],["杭州", 275933.77],["台湾", 234000.0],
+      ["上海", 230451.75],
+      
+      ["拉萨", 223606.25],
+      ["广州", 218486.46],
+      ["南京", 206874.12], ["成都", 200103.86],["澳门", 197750.00],
+      ["武汉", 188480.95]
+      
+     
+      
+    ];
+
+    const professionData = [
+      ["区块链工程师", 303202.90],
+      ["语音/视频/图形开发", 255897.79],
+      ["Golang", 211476.99],
+      ["其他后端开发", 196092.84],
+      ["C/C++", 187807.38],
+      ["Node.js", 178838.50],
+      ["iOS", 175136.85],
+      ["Java", 161772.47],
+      ["U3D", 161889.05],
+      ["Android", 154278.57]
+    ];
+
+    // Extracting city names and salary values
+    const cityList = cityData.map(function (item) {
+      return item[0];
+    });
+    const cityValueList = cityData.map(function (item) {
+      return item[1];
+    });
+
+    // Extracting profession names and salary values
+    const professionList = professionData.map(function (item) {
+      return item[0];
+    });
+    const professionValueList = professionData.map(function (item) {
+      return item[1];
+    });
+
+    var chartDom = document.getElementById('mainn');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+	option = {
+      visualMap: [
+        {
+          show: false,
+          type: 'continuous',
+          seriesIndex: 0,
+          min: 0,
+          max: 400000,
+		  inRange: {
+                color: ['#37A2DA', '#32C5E9', '#67E0E3'], // 颜色渐变
+            }
+        },
+        {
+          show: false,
+          type: 'continuous',
+          seriesIndex: 1,
+          dimension: 0,
+          min: 0,
+          max: professionList.length - 1,
+		  inRange: {
+                color: ['#37A2DA', '#32C5E9', '#67E0E3'], // 颜色渐变
+            }
+        }
+      ],
+      title: [
+        {
+          left: 'center',
+          top: '2%',
+          text: '城市年薪排行榜'
+        },
+        {
+          top: '51%',
+          left: 'center',
+          text: '互联网行业年薪排行榜'
+        }
+      ],
+      tooltip: {
+        trigger: 'axis'
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: cityList,
+          axisLabel: {
+            interval: 0,
+            rotate: 30 // Adjust the rotation angle to fit all city names properly
+          }
+        },
+        {
+          type: 'category',
+          data: professionList,
+          gridIndex: 1,
+          axisLabel: {
+            interval: 0,
+            rotate: 30 // Adjust the rotation angle to fit all profession names properly
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        },
+        {
+          type: 'value',
+          gridIndex: 1
+        }
+      ],
+      grid: [
+    {
+      bottom: '60%'
+    },
+    {
+      top: '60%'
+    }
+  ],
+  series: [
+    {
+        type: 'line',
+        showSymbol: false,
+        data: cityValueList,
+        lineStyle: {
+            color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 0,
+                colorStops: [
+                    { offset: 0, color: '#ADD8E6' }, // Dark Blue
+                    { offset: 1, color: '#00008B' }  // Light Blue
+                ]
+            },
+            width: 2 // Adjust the line width if needed
+        },
+        itemStyle: {
+            color: '#00008B'  // Dark Blue at the starting point
+        }
+    },
+    {
+        type: 'line',
+        showSymbol: false,
+        data: professionValueList,
+        xAxisIndex: 1,
+        yAxisIndex: 1,
+        lineStyle: {
+            color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 0,
+                colorStops: [
+                    { offset: 0, color: '#ADD8E6' }, // Dark Blue
+                    { offset: 1, color: '#00008B' }  // Light Blue
+                ]
+            },
+            width: 2 // Adjust the line width if needed
+        },
+        itemStyle: {
+            color: '#00008B'  // Dark Blue at the starting point
+        }
+    }
+]
+
+    };
+
+    option && myChart.setOption(option);
+		function fontSizeRem(size) {
+			const clientWidth = window.innerWidth || document.documentElement.clientWidth ||
+				document.body.clientWidth;
+			if (!clientWidth) return;
+			let fontSize = clientWidth / 1920;
+			return size * fontSize;
+		}
+
+		function datas(data) {
+ 
+			var myChart3 = echarts.init(document.getElementById("chart13")); 
+
+		 
+
+			// 图表3
+			showchart("宫颈癌");
+		 
+
+			function showchart(name) {
+				var days = ['2016年'];
+				var province = ['北京市', '天津市', '河北省', '山西省', '内蒙古自治区', '辽宁省', '吉林省', '黑龙江省', '上海市', '江苏省', '浙江省', '安徽省',
+					'福建省', '江西省', '山东省', '河南省', '湖北省', '湖南省', '广东省', '广西壮族自治区', '海南省', '重庆市', '四川省', '贵州省', '云南省',
+					'西藏自治区', '陕西省', '甘肃省', '青海省', '宁夏回族自治区', '新疆维吾尔自治区','台湾省','香港特别行政区','澳门特别行政区'];
+
+				var sum = [];
+				for (var i = 0; i < data.dataPI[name].length; i++) {
+					sum[i] = 0
+					for (var j = 0; j < data.dataPI[name][i].length; j++) {
+						sum[i] = sum[i] + data.dataPI[name][i][j]
+					}
+				} 
+
+				var option3 = {
+					tooltip: {
+						show: true,
+						trigger: 'item'
+					},
+					visualMap: {
+						type: 'piecewise',
+						pieces: [{
+								min: 300000.1,
+								color: '#0c499c'
+							},
+							{
+								min: 250000.1,
+								max: 300000,
+								color: '#1876ce'
+							},
+							{
+								min: 200000.1,
+								max: 250000,
+								color: '#2196f1'
+							},
+							{
+								min: 150000,
+								max: 200000,
+								color: '#64b5f1'
+							},
+							{
+								min: 100000.1,
+								max: 150000,
+								color: '#bde0fe'
+							}
+						],
+						orient: 'vertical',
+						itemWidth: 25, //分段图形宽度
+						itemHeight: 15,
+						showLabel: true, //是否显示每项的文本标签。 >1000
+						seriesIndex: 0,
+						bottom: '15%',
+						left: '10%',
+					},
+					grid: { //直角坐标系绘图网格  条形图
+						right: '1%',
+						width: '30%'
+					},
+					xAxis: { //条形图
+						type: 'value',
+						position: 'top',
+						show: false
+					},
+					yAxis: { //条形图
+						inverse: true,
+						type: 'category',
+						axisTick: { //刻度
+							show: false,
+						},
+						axisLine: {
+							show: false //不显示
+						},
+					},
+
+					geo: { //地理坐标系组件
+						map: 'china',
+						layoutCenter: ['35%', '55%'],
+						layoutSize: '85%',
+
+						emphasis: { // 鼠标移入时显示的默认样式
+							itemStyle: {
+								areaColor: '#07d5ec',
+							},
+						},
+					},
+					series: [{
+							type: 'map',
+							map: 'china',
+							roam: false,
+							geoIndex: 0,
+						},
+						{
+							type: 'bar',
+							barWidth: '80%',
+							label: {
+								show: true,
+								position: 'right',
+							}
+						}
+					],
+					timeline: {
+            show: false,
+						axisType: 'category',
+						loop: false,
+						autoPlay: true,
+						currentIndex: 0,
+						playInterval: 5000,
+						realtime: true,
+						lineStyle: {
+							color: '#cccccc'
+						},
+						left: '10%',
+						right: '40%',
+						bottom: '5%',
+						data: days
+					},
+					options: [],
+					animationDuration: 0,
+					animationDurationUpdate: 3000,
+					animationEasing: 'linear',
+					animationEasingUpdate: 'linear',
+				};
+
+				for (var i = 0; i < days.length; i++) {
+					var res = [];
+					for (j = 0; j < data.dataPI[name][i].length; j++) {
+						res.push({
+							name: province[j],
+							value: data.dataPI[name][i][j]
+						});
+					}
+
+					res.sort(function(a, b) { //每天降序
+						return b.value - a.value;
+					});
+					var res1 = [];
+					var res2 = [];
+					for (t = 0; t < 10; t++) { //取前10{地区，数量}
+						res1[t] = res[t].name;
+						res2[t] = res[t].value;
+					}
+
+					//options[]加入数据
+					option3.options.push({
+						title: [{
+								text:  'Boss直聘各省会城市互联网岗位平均年薪',
+                top:'2%',
+								left: '20%'
+							},
+							{
+								
+								text: '互联网岗位平均年薪前十排行榜',top:'2%',
+								right: '7%'
+							},
+
+						],
+            grid: {
+			height:'80%',
+			left: '68%',
+			top: '10%'
+		},
+						yAxis: {
+							data: res1,
+						},
+						series: [{ //地图
+								name: '平均年薪',
+								type: 'map',
+								data: res
+							},
+							{ //条形图						
+								type: 'bar',
+								data: res2, //值，前10
+								itemStyle: {
+									color: function(params) { // 排名颜色
+										if (params.dataIndex < 3) { //前三名颜色
+											return '#1567bd';
+										} else {
+											return '#64b5f6'; // 后面名颜色
+										}
+									}
+								}
+							}
+						]
+					});
+				}
+
+				if (option3 && typeof option3 === "object") {
+					myChart3.setOption(option3, true);
+					myChart3.on('click', function(params) {
+						if (params.componentType === 'series' && params.seriesType === 'map') {
+							btn1.style.display = 'none';
+							btn2.style.display = 'none';
+							myChart3.setOption(getLineOption(params.name), true);
+							backButton.style.display = 'block';
+						}
+					});
+					backButton.addEventListener('click', function() {
+						myChart3.setOption(option3, true);
+						this.style.display = 'none';
+						btn1.style.display = 'block';
+						btn2.style.display = 'block';
+					});
+				}
+			}
+
+			window.addEventListener("resize", function() {
+				myChart1.resize();
+				myChart2.resize();
+				myChart3.resize();
+			})
+		}
+	</script>
+
+	<script src="data.json?cb=data"></script>
+</html>

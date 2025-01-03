@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>智聘视界——基于DrissionPage的BOSS直聘数据可视化平台
+        </title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<div class="div1">
+			<!-- 导航栏 -->
+			<nav class="navbar">
+				<a href="index.html" class="nav_eng">智聘视界</a>
+				<ul class="nav_menu">
+					<a href="index.html" class="nav_link">
+						<li class="nav_item">首页</li>
+					</a>
+					<a href="nianxin.html" class="nav_link">
+						<li class="nav_item">年薪</li>
+					</a>
+					<a href="xueli.html" class="nav_link">
+						<li class="nav_item">学历</li>
+					</a>
+					<a href="jingyan.html" class="nav_link">
+						<li class="nav_item">经验</li>
+					</a> 
+				</ul>
+
+				<div class="menu_btn">
+					<span class="line"></span>
+					<span class="line"></span>
+					<span class="line"></span>
+				</div>
+			</nav>
+			<!-- 项目背景 -->
+			<div class="total_word">
+				<p class="title1">智聘视界——基于DrissionPage的BOSS直聘数据可视化平台</p>
+				<p class="introduce1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在2024年9月发布的《中共中央 国务院关于实施就业优先战略促进高质量充分就业的意见》中指出，就业是最基本的民生，直接影响人民群众的生活质量、经济社会的持续健康发展以及国家的长期稳定。因此，针对当今复杂的就业市场，分析和理解就业趋势显得尤为重要。
+				</p>
+                
+             
+            
+            </div>
+			</div> 
+
+            
+	</body>
+
+	<script src="js/script.js"></script>
+	<script>
+		var cards = document.querySelectorAll('.cardabout')
+		var introduces = document.querySelectorAll('.introduce2')
+		var cardtitles = document.querySelectorAll("span")
+
+		cardtitles.forEach(function(span) {
+			span.addEventListener('click', function() {
+				var cardId = this.getAttribute('data-content');
+
+				cards.forEach(function(item) {
+					item.classList.remove('active');
+				});
+
+				var cardElement = document.getElementById(cardId);
+				if (cardElement) {
+					cardElement.classList.toggle('active');
+				}
+			});
+		});
+	</script>
+</html>
